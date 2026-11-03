@@ -50,7 +50,7 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-base-200 px-4 py-10">
+    <main className="flex min-h-[75vh] items-center justify-center bg-base-200 px-4 py-10">
       <div className="card w-full max-w-md bg-base-100 shadow-xl">
         <form onSubmit={handleSubmit} className="card-body gap-3">
           <h1 className="text-3xl font-bold">Login</h1>
