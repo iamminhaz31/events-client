@@ -1,46 +1,65 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
-type Status = "loading" | "ok" | "error";
+import { useState } from "react";
+import { authClient } from "@/lib/auth-client";
 
 export default function Home() {
-  const [status, setStatus] = useState<Status>("loading");
-  const [message, setMessage] = useState("");
+  const { data: session, isPending } = authClient.useSession();
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-
-    fetch(`${apiUrl}/health`)
-      .then((res) => res.json())
-      .then((data) => {
-        setStatus(data.ok ? "ok" : "error");
-        setMessage(data.message);
-      })
-      .catch((error) => {
-        setStatus("error");
-        setMessage(error.message);
+  const handleGoogle = async () => {
+    setError("");
+    setLoading(true);
+    try {
+      const res = await authClient.signIn.social({
+        provider: "google",
+        callbackURL: "/",
       });
-  }, []);
+      if (res?.error) {
+        setError(res.error.message || JSON.stringify(res.error));
+        setLoading(false);
+      }
+    } catch (e) {
+      setError((e as Error).message || "Unknown error");
+      setLoading(false);
+    }
+  };
+
+  const handleLogout = async () => {
+    await authClient.signOut();
+  };
+
+  if (isPending) return <p className="p-8">Loading...</p>;
 
   return (
-    <main className="min-h-screen flex items-center justify-center p-6">
-      <div className="card bg-base-200 shadow-xl w-full max-w-md">
-        <div className="card-body items-center text-center">
-          <h1 className="card-title text-2xl">NeighborHub</h1>
-          <p>Social Development Events Platform</p>
+    <main className="mx-auto max-w-md space-y-4 p-8">
+      <h1 className="text-2xl font-bold">NeighborHub - Auth Test</h1>
 
-          {status === "loading" && (
-            <span className="loading loading-spinner loading-md" />
-          )}
-          {status === "ok" && (
-            <div className="badge badge-success">Server: {message}</div>
-          )}
-          {status === "error" && (
-            <div className="badge badge-error">Server error: {message}</div>
-          )}
+      {session ? (
+        <div className="space-y-3">
+          <p>
+            Logged in: {session.user.name} ({session.user.email})
+          </p>
+          <button className="btn btn-error" onClick={handleLogout}>
+            Logout
+          </button>
         </div>
-      </div>
+      ) : (
+        <button
+          className="btn btn-primary"
+          onClick={handleGoogle}
+          disabled={loading}
+        >
+          {loading ? "Redirecting..." : "Continue with Google"}
+        </button>
+      )}
+
+      {error && (
+        <div className="alert alert-error">
+          <span>{error}</span>
+        </div>
+      )}
     </main>
   );
 }
