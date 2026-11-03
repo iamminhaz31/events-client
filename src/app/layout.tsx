@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Samaj Seba | Social Development Events",
+  title: "NeighborHub | Community Service Events",
   description:
     "Create, join and track community service events in your local area.",
 };

@@ -27,7 +27,7 @@ export default function Home() {
     <main className="min-h-screen flex items-center justify-center p-6">
       <div className="card bg-base-200 shadow-xl w-full max-w-md">
         <div className="card-body items-center text-center">
-          <h1 className="card-title text-2xl">Samaj Seba</h1>
+          <h1 className="card-title text-2xl">NeighborHub</h1>
           <p>Social Development Events Platform</p>
 
           {status === "loading" && (
