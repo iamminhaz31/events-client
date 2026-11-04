@@ -18,8 +18,8 @@ export default function LoginPage() {
     const password = String(form.get("password") || "");
 
     const found: Record<string, string> = {};
-    if (!/^\S+@\S+\.\S+$/.test(email)) found.email = "Thik email dao";
-    if (!password) found.password = "Password dao";
+    if (!/^\S+@\S+\.\S+$/.test(email)) found.email = "Please enter a valid email";
+    if (!password) found.password = "Please enter your password";
 
     setErrors(found);
     if (Object.keys(found).length > 0) {
@@ -32,7 +32,7 @@ export default function LoginPage() {
     setLoading(false);
 
     if (error) {
-      toast.error(error.message || "Email ba password vul");
+      toast.error(error.message || "Invalid email or password");
       return;
     }
 
@@ -46,7 +46,7 @@ export default function LoginPage() {
       provider: "google",
       callbackURL: "/",
     });
-    if (error) toast.error(error.message || "Google login fail hoyeche");
+    if (error) toast.error(error.message || "Google login failed");
   };
 
   return (
@@ -54,7 +54,7 @@ export default function LoginPage() {
       <div className="card w-full max-w-md bg-base-100 shadow-xl">
         <form onSubmit={handleSubmit} className="card-body gap-3">
           <h1 className="text-3xl font-bold">Login</h1>
-          <p className="text-sm opacity-70">Abar swagotom!</p>
+          <p className="text-sm opacity-70">Welcome back!</p>
 
           <label className="form-control">
             <span className="label-text mb-1">Email</span>
@@ -72,7 +72,7 @@ export default function LoginPage() {
             <input
               name="password"
               type="password"
-              placeholder="Tomar password"
+              placeholder="Your password"
               className="input input-bordered w-full"
             />
             {errors.password && (
@@ -91,7 +91,7 @@ export default function LoginPage() {
           </button>
 
           <p className="mt-2 text-center text-sm">
-            Notun user?{" "}
+            New here?{" "}
             <Link href="/register" className="link link-primary font-semibold">
               Register
             </Link>

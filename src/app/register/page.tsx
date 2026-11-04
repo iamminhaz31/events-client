@@ -14,19 +14,19 @@ export default function RegisterPage() {
   const validate = (name: string, email: string, photo: string, password: string) => {
     const e: Record<string, string> = {};
 
-    if (!name.trim()) e.name = "Name dao";
+    if (!name.trim()) e.name = "Please enter your name";
 
-    if (!/^\S+@\S+\.\S+$/.test(email)) e.email = "Thik email dao";
+    if (!/^\S+@\S+\.\S+$/.test(email)) e.email = "Please enter a valid email";
 
     try {
       new URL(photo);
     } catch {
-      e.photo = "Thik photo URL dao (https://...)";
+      e.photo = "Please enter a valid photo URL (https://...)";
     }
 
-    if (password.length < 6) e.password = "Password kom pokkhe 6 character hote hobe";
-    else if (!/[A-Z]/.test(password)) e.password = "Password e ekta uppercase letter lagbe";
-    else if (!/[a-z]/.test(password)) e.password = "Password e ekta lowercase letter lagbe";
+    if (password.length < 6) e.password = "Password must be at least 6 characters";
+    else if (!/[A-Z]/.test(password)) e.password = "Password must include an uppercase letter";
+    else if (!/[a-z]/.test(password)) e.password = "Password must include a lowercase letter";
 
     return e;
   };
@@ -57,7 +57,7 @@ export default function RegisterPage() {
     setLoading(false);
 
     if (error) {
-      toast.error(error.message || "Registration fail hoyeche");
+      toast.error(error.message || "Registration failed");
       return;
     }
 
@@ -71,7 +71,7 @@ export default function RegisterPage() {
       provider: "google",
       callbackURL: "/",
     });
-    if (error) toast.error(error.message || "Google login fail hoyeche");
+    if (error) toast.error(error.message || "Google login failed");
   };
 
   return (
@@ -79,14 +79,14 @@ export default function RegisterPage() {
       <div className="card w-full max-w-md bg-base-100 shadow-xl">
         <form onSubmit={handleSubmit} className="card-body gap-3">
           <h1 className="text-3xl font-bold">Register</h1>
-          <p className="text-sm opacity-70">NeighborHub e account kholo</p>
+          <p className="text-sm opacity-70">Create your NeighborHub account</p>
 
           <label className="form-control">
             <span className="label-text mb-1">Name</span>
             <input
               name="name"
               type="text"
-              placeholder="Tomar naam"
+              placeholder="Your name"
               className="input input-bordered w-full"
             />
             {errors.name && <span className="mt-1 text-sm text-error">{errors.name}</span>}
@@ -119,7 +119,7 @@ export default function RegisterPage() {
             <input
               name="password"
               type="password"
-              placeholder="Uppercase, lowercase, min 6 character"
+              placeholder="Uppercase, lowercase, min 6 characters"
               className="input input-bordered w-full"
             />
             {errors.password && (
@@ -138,7 +138,7 @@ export default function RegisterPage() {
           </button>
 
           <p className="mt-2 text-center text-sm">
-            Already account ache?{" "}
+            Already have an account?{" "}
             <Link href="/login" className="link link-primary font-semibold">
               Login
             </Link>
