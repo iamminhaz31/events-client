@@ -14,7 +14,7 @@ export default function Gallery() {
           {seeds.map((seed) => (
             <div
               key={seed}
-              className="aspect-[4/3] overflow-hidden rounded-box bg-base-300"
+              className="aspect-4/3 overflow-hidden rounded-box bg-base-300"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
