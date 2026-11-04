@@ -1,10 +1,17 @@
+import Hero from "@/components/home/Hero";
+import Features from "@/components/home/Features";
+import UpcomingPreview from "@/components/home/UpcomingPreview";
+import Gallery from "@/components/home/Gallery";
+import Newsletter from "@/components/home/Newsletter";
+
 export default function Home() {
   return (
-    <main className="mx-auto max-w-7xl px-4 py-16">
-      <h1 className="text-4xl font-bold">NeighborHub</h1>
-      <p className="mt-3 max-w-xl opacity-80">
-        Find, create and join community service events near you.
-      </p>
+    <main>
+      <Hero />
+      <Features />
+      <UpcomingPreview />
+      <Gallery />
+      <Newsletter />
     </main>
   );
 }
