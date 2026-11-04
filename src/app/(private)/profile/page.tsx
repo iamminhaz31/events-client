@@ -14,6 +14,31 @@ function isHttpUrl(value: string) {
   }
 }
 
+function ProfileSkeleton() {
+  return (
+    <main className="mx-auto max-w-2xl px-4 py-10">
+      <div className="skeleton h-9 w-48" />
+      <div className="skeleton mt-3 h-5 w-72" />
+      <div className="card mt-8 bg-base-100 shadow-md">
+        <div className="card-body">
+          <div className="flex items-center gap-4">
+            <div className="skeleton h-20 w-20 shrink-0 rounded-full" />
+            <div className="space-y-2">
+              <div className="skeleton h-6 w-40" />
+              <div className="skeleton h-4 w-56" />
+            </div>
+          </div>
+          <div className="divider" />
+          <div className="skeleton h-12 w-full" />
+          <div className="skeleton h-12 w-full" />
+          <div className="skeleton h-12 w-full" />
+          <div className="skeleton h-12 w-full" />
+        </div>
+      </div>
+    </main>
+  );
+}
+
 export default function ProfilePage() {
   const router = useRouter();
   const { data: session } = authClient.useSession();
@@ -22,7 +47,7 @@ export default function ProfilePage() {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  if (!user) return null;
+  if (!user) return <ProfileSkeleton />;
 
   const handleSubmit = async (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
