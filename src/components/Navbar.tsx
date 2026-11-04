@@ -22,18 +22,22 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 border-b border-base-300 bg-base-100">
       <div className="navbar mx-auto max-w-7xl px-4">
         <div className="navbar-start">
-          <Link href="/" className="text-2xl font-bold text-primary">
+          <Link href="/" className="text-xl font-bold text-primary sm:text-2xl">
             NeighborHub
           </Link>
         </div>
 
-        <div className="navbar-center">
+        <div className="navbar-center hidden sm:flex">
           <Link href="/events" className="btn btn-ghost">
             Upcoming Events
           </Link>
         </div>
 
-        <div className="navbar-end gap-2">
+        <div className="navbar-end gap-1 sm:gap-2">
+          <Link href="/events" className="btn btn-ghost btn-sm sm:hidden">
+            Events
+          </Link>
+
           <ThemeToggle />
 
           {isPending ? (
@@ -41,10 +45,7 @@ export default function Navbar() {
           ) : user ? (
             <>
               <div className="dropdown dropdown-end">
-                <div
-                  className="tooltip tooltip-bottom"
-                  data-tip={user.name}
-                >
+                <div className="tooltip tooltip-bottom" data-tip={user.name}>
                   <div
                     tabIndex={0}
                     role="button"
@@ -64,6 +65,9 @@ export default function Navbar() {
                   tabIndex={0}
                   className="menu dropdown-content z-10 mt-3 w-52 rounded-box bg-base-100 p-2 shadow"
                 >
+                  <li>
+                    <Link href="/profile">Profile</Link>
+                  </li>
                   <li>
                     <Link href="/create-event">Create Event</Link>
                   </li>
