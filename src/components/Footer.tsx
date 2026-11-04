@@ -7,9 +7,9 @@ export default function Footer() {
         <div>
           <h3 className="text-2xl font-bold text-white">NeighborHub</h3>
           <p className="mt-3 text-sm opacity-80">
-            Ekta community platform jekhane tumi samajik seba mulok event
-            create korte, join korte ar track korte paro. Shobai mile
-            amader para, amader shohor.
+            A community platform where you can create, join and track social
+            service events. Together we can make our neighborhood a better
+            place.
           </p>
         </div>
 
