@@ -1,5 +1,13 @@
+"use client";
+
 import Link from "next/link";
 import { EventItem, formatEventDate } from "@/lib/types";
+
+const FALLBACK_IMAGE =
+  "data:image/svg+xml;utf8," +
+  encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500"><rect width="800" height="500" fill="#e5e7eb"/><text x="400" y="260" font-family="Arial, sans-serif" font-size="32" fill="#6b7280" text-anchor="middle">Image not available</text></svg>`
+  );
 
 export default function EventCard({ event }: { event: EventItem }) {
   return (
@@ -10,6 +18,10 @@ export default function EventCard({ event }: { event: EventItem }) {
           src={event.thumbnail}
           alt={event.title}
           className="h-full w-full object-cover"
+          onError={(e) => {
+            const img = e.currentTarget;
+            if (img.src !== FALLBACK_IMAGE) img.src = FALLBACK_IMAGE;
+          }}
         />
       </figure>
 
