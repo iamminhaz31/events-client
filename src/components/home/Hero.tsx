@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="relative flex min-h-[460px] items-center overflow-hidden md:min-h-[580px]">
+    <section className="relative flex min-h-115 items-center overflow-hidden md:min-h-145">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="/images/banner.jpg"
